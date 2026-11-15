@@ -1,0 +1,603 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "Space Grotesk Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 700;
+  src: url("@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2")
+    format("woff2-variations");
+}
+
+:root {
+  color-scheme: dark;
+  --page: #020002;
+  --surface: #0c0a10;
+  --text: #ffffff;
+  --muted: #c3c0ca;
+  --accent: #6e74f7;
+  --accent-strong: #6e74f7;
+  --line: rgb(255 255 255 / 15%);
+  --control-border: rgb(255 255 255 / 40%);
+  --focus: #6e74f7;
+  --header: rgb(2 0 2 / 96%);
+  --accent-line: rgb(110 116 247 / 56%);
+  --accent-wash: rgb(110 116 247 / 12%);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  font-family: "Segoe UI", system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--page);
+  color: var(--text);
+  scroll-behavior: smooth;
+  scrollbar-color: var(--accent) var(--page);
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Space Grotesk Variable", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--page);
+  color: var(--text);
+  caret-color: var(--accent);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+body,
+button,
+a {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: from-font;
+  text-underline-offset: 0.2em;
+}
+
+a:not(.skip-link) {
+  transition:
+    color 150ms ease-out,
+    transform 150ms var(--ease-out);
+}
+
+a:not(.skip-link):active {
+  transform: scale(0.985);
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--page);
+}
+
+html {
+  scroll-padding-block-start: 6rem;
+}
+
+section[id] {
+  scroll-margin-block-start: 6rem;
+}
+
+.skip-link {
+  position: absolute;
+  z-index: 50;
+  inset-block-start: 0.75rem;
+  inset-inline-start: 0.75rem;
+  transform: translateY(-180%);
+  border-radius: 0.5rem;
+  background: var(--accent);
+  color: var(--page);
+  padding: 0.65rem 0.9rem;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.section-rule {
+  border-color: var(--line);
+}
+
+.surface-card {
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+#inicio {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+}
+
+.hero-atmosphere {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-atmosphere span {
+  position: absolute;
+  top: 5%;
+  right: -15%;
+  width: min(80vw, 48rem);
+  aspect-ratio: 1;
+  border: 1px solid rgb(110 116 247 / 18%);
+  border-radius: 40% 60% 56% 44%;
+  animation: field-orbit 28s linear infinite;
+}
+
+.hero-atmosphere span:nth-child(2) {
+  inset: 18% -3% auto auto;
+  width: min(64vw, 36rem);
+  border-color: rgb(110 116 247 / 25%);
+  animation-duration: 21s;
+  animation-direction: reverse;
+}
+
+.hero-atmosphere span:nth-child(3) {
+  inset: 32% 12% auto auto;
+  width: min(48vw, 24rem);
+  border-color: rgb(110 116 247 / 30%);
+  animation-duration: 16s;
+}
+
+.hero-signal {
+  position: absolute;
+  z-index: -1;
+  right: -3%;
+  bottom: 1%;
+  width: min(72%, 45rem);
+  overflow: visible;
+  pointer-events: none;
+}
+
+.signal-path,
+.signal-pulse {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.signal-path {
+  opacity: 0.3;
+  stroke-dasharray: 1000;
+  animation: signal-draw 1.8s var(--ease-out) both;
+}
+
+.signal-pulse {
+  stroke-dasharray: 40 960;
+  animation: signal-travel 6s linear infinite;
+}
+
+.signal-node {
+  fill: var(--accent);
+  animation: signal-breathe 3s ease-in-out infinite alternate;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+#inicio[data-motion-paused] .hero-atmosphere span,
+#inicio[data-motion-paused] .profile-figure::before,
+#inicio[data-motion-paused] .profile-figure::after,
+#inicio[data-motion-paused] .signal-pulse,
+#inicio[data-motion-paused] .signal-node {
+  animation-play-state: paused;
+}
+
+.profile-photo {
+  position: relative;
+  z-index: 1;
+  border: 1px solid var(--accent-line);
+  transition: transform 650ms var(--ease-out);
+}
+
+.profile-figure {
+  position: relative;
+  isolation: isolate;
+}
+
+.profile-figure::before,
+.profile-figure::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+}
+
+.profile-figure::before {
+  inset: -7% -5%;
+  border: 1px solid var(--accent-line);
+  border-radius: 48% 52% 56% 44%;
+  animation: profile-orbit 22s linear infinite;
+}
+
+.profile-figure::after {
+  inset: 14%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(110 116 247 / 30%), transparent 68%);
+  filter: blur(28px);
+  animation: profile-glow 9s ease-in-out infinite alternate;
+}
+
+.hero-copy [data-hero-enter],
+[data-hero-enter] {
+  animation: hero-arrive 760ms var(--ease-out) both;
+}
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 320ms var(--ease-out),
+    border-color 320ms ease,
+    box-shadow 320ms ease;
+}
+
+.project-card::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: translateX(-100%);
+  transition: transform 650ms var(--ease-out);
+}
+
+.project-card:focus-within::before {
+  transform: translateX(100%);
+}
+
+.language-button {
+  gap: 0.3rem;
+  border-color: transparent;
+  color: var(--muted);
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 150ms var(--ease-out);
+}
+
+.language-button-active {
+  border-color: var(--accent-line);
+  background: var(--accent-wash);
+  color: var(--text);
+}
+
+.language-button:active {
+  transform: scale(0.94);
+}
+
+.language-flag {
+  display: block;
+  width: 24px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 2px;
+  transition: transform 220ms var(--ease-out);
+}
+
+.language-button-active .language-flag {
+  transform: scale(1.1);
+}
+
+.language-code {
+  font-size: 0.625rem;
+  letter-spacing: 0.025em;
+}
+
+.reading-progress {
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.experience-timeline {
+  position: relative;
+}
+
+.experience-timeline::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 1px;
+  content: "";
+  background: var(--accent);
+  transform-origin: top;
+}
+
+.primary-cta,
+.secondary-cta {
+  transition:
+    color 220ms ease,
+    background-color 220ms ease,
+    border-color 220ms ease,
+    transform 220ms var(--ease-out),
+    box-shadow 220ms ease;
+}
+
+.filled-cta {
+  color: var(--page);
+}
+
+.timeline-marker {
+  transform: scale(0.7);
+}
+
+.timeline-entry[data-visible="true"] .timeline-marker {
+  animation: marker-pop 460ms var(--ease-out) both;
+}
+
+html[data-motion="ready"] [data-reveal][data-visible="true"] {
+  animation: section-arrive 680ms var(--ease-out) var(--reveal-delay, 0ms);
+}
+
+html[data-motion="ready"] .work-projects [data-reveal][data-visible="true"] {
+  animation-name: project-arrive;
+  animation-duration: 850ms;
+}
+
+html[data-motion="ready"] [data-reveal]:focus-within {
+  animation: none;
+}
+
+.tag {
+  border: 1px solid var(--accent-line);
+  background: var(--accent-wash);
+  color: var(--text);
+}
+
+.quiet-link {
+  color: var(--muted);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .quiet-link:hover {
+    color: var(--accent);
+  }
+
+  .language-button:not(.language-button-active):hover {
+    border-color: var(--line);
+    color: var(--text);
+  }
+
+  .project-card:hover {
+    transform: perspective(1000px) translateY(-8px) rotateX(2deg) rotateY(-2deg);
+    border-color: var(--accent-line);
+    box-shadow: 0 22px 48px rgb(0 0 0 / 45%);
+  }
+
+  .project-card:hover::before {
+    transform: translateX(100%);
+  }
+
+  .language-button:hover .language-flag {
+    transform: translateY(-3px) scale(1.1);
+  }
+
+  .profile-figure:hover .profile-photo {
+    transform: scale(1.015);
+  }
+
+  .primary-cta:hover,
+  .secondary-cta:hover {
+    transform: translateY(-2px);
+  }
+
+  .primary-cta:hover {
+    background-color: var(--text);
+    color: var(--page);
+    box-shadow: 0 8px 26px rgb(110 116 247 / 20%);
+  }
+
+  .secondary-cta:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+}
+
+@media (max-width: 375px) {
+  .primary-nav {
+    width: 100%;
+  }
+
+  .primary-nav-list {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0.25rem;
+    font-size: 0.8125rem;
+  }
+
+  .language-button {
+    min-width: 2.5rem;
+  }
+}
+
+@supports (animation-timeline: scroll()) {
+  .reading-progress {
+    animation: reading-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+
+  .experience-timeline::before {
+    animation: reading-progress-vertical linear both;
+    animation-timeline: view(block);
+    animation-range: entry 20% exit 75%;
+  }
+
+  .profile-figure {
+    animation: profile-depth linear both;
+    animation-timeline: view(block);
+    animation-range: exit 0% exit 100%;
+  }
+
+  .hero-signal {
+    animation: signal-depth linear both;
+    animation-timeline: view(block);
+    animation-range: exit 0% exit 100%;
+  }
+}
+
+@keyframes signal-draw {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes signal-travel {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes signal-breathe {
+  from { transform: scale(0.7); opacity: 0.5; }
+  to { transform: scale(1.4); opacity: 1; }
+}
+
+@keyframes signal-depth {
+  from { translate: 0 0; }
+  to { translate: 0 -70px; }
+}
+
+@keyframes section-arrive {
+  from { opacity: 0.65; transform: translateY(24px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes project-arrive {
+  from { opacity: 0.65; transform: translateY(36px) scale(0.96); filter: blur(5px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+
+@keyframes reading-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes reading-progress-vertical {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes profile-depth {
+  from { translate: 0 0; }
+  to { translate: 0 40px; }
+}
+
+@keyframes field-orbit {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hero-arrive {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+    filter: blur(7px);
+  }
+
+  72% {
+    opacity: 1;
+    transform: translate3d(0, -2px, 0);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@keyframes profile-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes profile-glow {
+  from {
+    transform: translate3d(-5%, 2%, 0) scale(0.92);
+    opacity: 0.45;
+  }
+
+  to {
+    transform: translate3d(5%, -2%, 0) scale(1.08);
+    opacity: 0.8;
+  }
+}
+
+@keyframes marker-pop {
+  0% {
+    transform: scale(0.65);
+  }
+
+  68% {
+    transform: scale(1.35);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+
+  .hero-atmosphere span,
+  .profile-figure::before,
+  .profile-figure::after,
+  .signal-path,
+  .signal-pulse,
+  .signal-node,
+  .hero-signal,
+  .profile-figure,
+  .reading-progress,
+  .experience-timeline::before,
+  .hero-copy [data-hero-enter],
+  [data-hero-enter],
+  html[data-motion="ready"] [data-reveal][data-visible="true"],
+  html[data-motion="ready"] .work-projects [data-reveal][data-visible="true"],
+  .timeline-entry[data-visible="true"] .timeline-marker {
+    animation: none;
+  }
+
+  .signal-path { stroke-dashoffset: 0; }
+  .signal-pulse { opacity: 0; }
+  .reading-progress { display: none; }
+  .timeline-marker { transform: none; }
+
+  .project-card:hover,
+  .profile-figure:hover .profile-photo,
+  .primary-cta:hover,
+  .secondary-cta:hover,
+  .language-button:hover .language-flag {
+    transform: none;
+  }
+}

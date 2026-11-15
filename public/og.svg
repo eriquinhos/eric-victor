@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#020002"/>
+  <path d="M96 96v438" stroke="#6E74F7" stroke-width="3"/>
+  <text x="136" y="168" fill="#6E74F7" font-family="Arial,sans-serif" font-size="26" font-weight="700" letter-spacing="4">ERIC VICTOR</text>
+  <text x="136" y="285" fill="#FFFFFF" font-family="Arial,sans-serif" font-size="58" font-weight="700">Dados, backend e</text>
+  <text x="136" y="355" fill="#FFFFFF" font-family="Arial,sans-serif" font-size="58" font-weight="700">desenvolvimento full-stack</text>
+  <text x="136" y="440" fill="#C3C0CA" font-family="Arial,sans-serif" font-size="25">Data &amp; Analytics · Python Backend · Full-stack</text>
+</svg>
