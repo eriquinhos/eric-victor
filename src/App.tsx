@@ -31,6 +31,13 @@ const flags: Record<Locale, string> = {
   fr: flagFr,
 }
 
+const resumes: Record<Locale, string> = {
+  'pt-BR': 'Curriculo_Eric_Victor_PT-BR.pdf',
+  en: 'Resume_Eric_Victor_EN-US.pdf',
+  es: 'Curriculum_Eric_Victor_ES-ES.pdf',
+  fr: 'CV_Eric_Victor_FR-FR.pdf',
+}
+
 const navigation = [
   { id: 'about', href: '#sobre' },
   { id: 'projects', href: '#projetos' },
@@ -42,7 +49,7 @@ const navigation = [
 function App() {
   const [locale, setLocale] = useState<Locale>('pt-BR')
   const t = translations[locale]
-  const resumeHref = `${import.meta.env.BASE_URL}cv-eric-victor.pdf`
+  const resumeHref = `${import.meta.env.BASE_URL}${resumes[locale]}`
 
   useEffect(() => {
     document.documentElement.lang = t.htmlLang
@@ -151,7 +158,7 @@ function App() {
               <a className="primary-cta filled-cta inline-flex min-h-12 items-center justify-center rounded-lg bg-[var(--accent)] px-5 py-3 text-sm font-bold text-[var(--page)]" href="#projetos">
                 {t.hero.projectsCta}
               </a>
-              <a className="secondary-cta inline-flex min-h-12 items-center justify-center rounded-lg border border-[var(--control-border)] px-5 py-3 text-sm font-semibold text-[var(--text)]" href={resumeHref} download="Eric-Victor-Curriculo.pdf">
+              <a className="secondary-cta inline-flex min-h-12 items-center justify-center rounded-lg border border-[var(--control-border)] px-5 py-3 text-sm font-semibold text-[var(--text)]" href={resumeHref} download={resumes[locale]}>
                 {t.hero.cvCta}<span className="sr-only">, {t.hero.cvLanguage}</span>
               </a>
             </div>
@@ -319,7 +326,7 @@ function App() {
                 <a className="text-lg font-semibold text-[var(--accent)] underline" href={`mailto:${contact.email}`}>{contact.email}</a>
               </div>
               <div className="mt-8 grid grid-cols-2 gap-3 lg:mt-0">
-                <a className="primary-cta filled-cta col-span-2 inline-flex min-h-12 items-center justify-center rounded-lg bg-[var(--accent)] px-5 py-3 text-center text-sm font-bold text-[var(--page)]" href={resumeHref} download="Eric-Victor-Curriculo.pdf">
+                <a className="primary-cta filled-cta col-span-2 inline-flex min-h-12 items-center justify-center rounded-lg bg-[var(--accent)] px-5 py-3 text-center text-sm font-bold text-[var(--page)]" href={resumeHref} download={resumes[locale]}>
                   {t.contact.cvCta}
                 </a>
                 <a className="secondary-cta inline-flex min-h-12 items-center justify-center rounded-lg border border-[var(--control-border)] px-5 py-3 text-sm font-semibold text-[var(--text)]" href={contact.github} target="_blank" rel="noreferrer">
